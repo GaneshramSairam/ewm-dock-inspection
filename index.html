@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dock Check | EWM receiving demo</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="inspection.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header><div class="shell mast"><strong>DOCK CHECK</strong><span>RECEIVING STATION · DEMO</span></div></header>
+  <main class="shell">
+    <p class="kicker">INBOUND / LANE 01</p>
+    <h1>Receiving inspection</h1>
+    <p class="intro">Scan a handling unit, inspect its seal, and record what arrived.</p>
+    <div class="layout">
+      <section class="panel">
+        <div class="section-title"><span>01</span><h2>Identify the pallet</h2></div>
+        <form id="scan-form">
+          <label for="scan">Handling unit barcode</label>
+          <div class="inline"><input id="scan" required autocomplete="off" maxlength="40" placeholder="HU-1001"><button type="submit">Verify scan</button></div>
+        </form>
+        <button id="example" class="text-button">Use sample HU-1001</button>
+        <p id="scan-result" class="muted" role="status">Waiting for a scan</p>
+        <hr>
+        <div class="section-title"><span>02</span><h2>Inspect the seal</h2></div>
+        <p class="muted">The detector checks the blue seal in the center strip. Try a sample or align a close-up in the same position.</p>
+        <div id="controls" class="actions">
+          <button id="broken" data-sample="broken" disabled>Try broken seal</button>
+          <button id="intact" data-sample="intact" class="secondary" disabled>Try intact seal</button>
+          <button id="upload" class="secondary" disabled>Open photo</button>
+          <input id="file" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+        </div>
+        <div class="viewer">
+          <canvas id="frame" width="640" height="360" hidden aria-label="Receiving photo with inspection area highlighted"></canvas>
+          <div id="placeholder">The receiving photo appears here</div>
+        </div>
+        <p id="vision-result" class="muted" role="status">Verify a scan to begin.</p>
+      </section>
+      <section class="panel side">
+        <div class="section-title"><span>03</span><h2>Review and save</h2></div>
+        <p class="muted">Confirm what you see. This record can support a quality review or a claim.</p>
+        <label for="note">Operator note <small>Optional</small></label>
+        <textarea id="note" maxlength="500" rows="3" placeholder="e.g. Seal torn at handover"></textarea>
+        <div class="actions">
+          <button id="confirm" disabled>Confirm damage</button>
+          <button id="clear" class="secondary" disabled>Mark intact</button>
+        </div>
+        <p id="review-result" role="status" class="muted"></p>
+        <hr>
+        <h2>Saved inspections</h2>
+        <p class="muted">Records are saved in this browser. Export an evidence package to keep a copy.</p>
+        <ul id="records" class="records"></ul>
+      </section>
+    </div>
+    <footer>Prototype · Sample SAP records · No live SAP connection</footer>
+  </main>
+</body>
+</html>
